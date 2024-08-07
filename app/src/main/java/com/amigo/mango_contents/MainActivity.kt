@@ -1,6 +1,8 @@
 package com.amigo.mango_contents
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -160,6 +162,17 @@ class MainActivity : AppCompatActivity() {
         val rvAdapter = RVAdapter(baseContext, items)
         recyclerview.adapter = rvAdapter
         //recyclerview.layoutManager = LinearLayoutManager(this)
+
+        rvAdapter.itemClick = object: RVAdapter.ItemClick{
+            override fun onClick(view: View, position: Int){
+
+                var intent = Intent(baseContext, ViewActivity::class.java)
+                intent.putExtra("url", items[position].url)
+                startActivity(intent)
+
+            }
+        }
+
         recyclerview.layoutManager = GridLayoutManager(this, 2)
 
 
